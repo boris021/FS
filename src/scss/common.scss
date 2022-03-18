@@ -51,7 +51,7 @@ a {
 }
 
 .home-menu {
-	margin-top: 80px;
+	@include adaptiveValue("margin-top", 80, 40);
 }
 
 .img-home {
@@ -59,7 +59,7 @@ a {
 	text-align: center;
 	margin: auto;
 	padding: rem(20) 0;
-	width: 100%;
+	max-width: 100%;
 }
 
 pre {

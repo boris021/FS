@@ -328,8 +328,7 @@
 				</p>
 				<p>При ошибке связанной с Python запустите команду <strong>npm install -g windows-build-tools</strong>
 				</p>
-				<h4>При ошибке Error [ERR_UNSUPPORTED_ESM_URL_SCHEME]:
-				</h4>
+				<h4>При ошибке Error <br>[ERR_ UNSUPPORTED_ESM_ URL_SCHEME]:</h4>
 				<p>Качаем версию 14.15.1 (https://nodejs.org/dist/v14.15.1/), в Zip архиве.
 					Заходим в папку с установленным NodeJS, распаковываем содержимое архива в папку, с заменой файлов.
 					Далее идем сюда «Панель управления» => «Система» => «Дополнительные параметры системы» =>
@@ -994,8 +993,7 @@
 					<strong>menuClose()</strong> для открытия/закрытия меню из произвольного кода. Все функции импортируемые.
 				</p>
 				<h4>Дополнительные материалы</h4>
-				<a
-					href="https://youtu.be/zs1r8yafTE8?list=PLM6XATa8CAG6IJvQBkrTTNZmpIcyS2Avk">https://youtu.be/zs1r8yafTE8?list=PLM6XATa8CAG6IJvQBkrTTNZmpIcyS2Avk</a>
+				<a href="https://youtu.be/zs1r8yafTE8?list=PLM6XATa8CAG6IJvQBkrTTNZmpIcyS2Avk">Перейти</a>
 
 			</div>
 
@@ -1113,18 +1111,249 @@
 
 			<div id="home9" class="home-menu">
 				<h1>Модуль «Динамический адаптив»</h1>
+				<p>Во время работы над адаптивом сайта, нам то и дело приходится изменять внешний вид объекта. В некоторых
+					случаях нам необходимо изменить порядок элементов, когда при определенном разрешении экрана некоторый
+					блок должен находится в совершенно другом месте структуры. Особенно часто это требуется при адаптации
+					шапки сайта когда необходимо перенести блок с контактами в меню-бургер.
+				</p>
+				<p>Функционал динамического адаптива перемещает необходимый блок (на определенном разрешении) в другой блок.
+					Перемещение отображается в разметке HTML.
+				</p>
+				<h3>Подключение функционала
+				</h3>
+				<p>[JS] В файле <strong>js/app.js</strong> раскомментировать строку import
+					<strong>«./libs/dynamic_adapt.js»</strong></p>
+				<h3>Использование функционала
+				</h3>
+				<p>[HTML] В блок который нужно переместить добавляем атрибут <strong>data-da</strong> со значениями атрибута
+					указанными ниже:</p>
+				<img src="@img/image5.jpg" class="img-home">
+				<h3>Расположение и дополнительные данные
+				</h3>
+				<p>Функционал находится в <strong>js/libs/dynamic_adapt.js</strong>. Название функции
+					<strong>DynamicAdapt(type)</strong>.</p>
+				<p>У модуля есть ограничения, например, если перекидывать несколько объектов одновременно в один и тот же
+					блок, может возникнуть путаница с порядком блоков.</p>
+				<h3>Дополнительные материалы</h3>
+				<a href="https://youtu.be/QKuMr575vlQ">Перейти</a>
+
 			</div>
 
-			<div id="home10" class="home-menu">
+			<div id=" home10" class="home-menu">
 				<h1>Модуль «Прокрутка к нужному блоку». Плавная навигация по странице.</h1>
+				<p>В данном модуле реализован плавный скролл после клика по ссылке (кнопке) до нужного блока на странице.
+					Если в адресе страницы будет передан хеш и блок с таким селектором будет найден на странице, прокрутка к
+					блоку произойдет автоматически. Также, модуль позволяет построить навигацию по странице с добавлением
+					класса текущему пункту навигации (пункту меню) при скролле к определенному блоку.
+				</p>
+				<h3>Подключение функционала
+				</h3>
+				<p><strong>[JS]</strong> В файле <strong>js/app.js </strong> раскомментировать строку
+					<strong>flsScroll.pageNavigation()</strong>;
+				</p>
+				<h3>Использование функционала</h3>
+				<p><strong>[HTML]</strong> К элементам навигации (пунктам меню), либо к произвольному объекту, добавляем
+					HTML-атрибут <strong>data-goto </strong> а в качестве значения указываем CSS селектор блока до которого
+					нужно прокрутить:
+				</p>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);">&lt;a href=<span class="hljs-string" style="color: rgb(162, 252, 162);">"#"</span> data-<span class="hljs-keyword" style="color: rgb(252, 194, 140);">goto</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">".имя класса блока"</span> <span class="hljs-keyword" style="color: rgb(252, 194, 140);">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"link"</span>&gt;Пункт навигации&lt;/a&gt;</pre>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);">&lt;a href=<span class="hljs-string" style="color: rgb(162, 252, 162);">"#"</span> data-<span class="hljs-keyword" style="color: rgb(252, 194, 140);">goto</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"#id блока"</span> <span class="hljs-keyword" style="color: rgb(252, 194, 140);">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"link"</span>&gt;Пункт навигации&lt;/a&gt;</pre>
+				<p>Если нужно чтобы скролл учитывал шапку (не докручивал на высоту шапки, используется при фиксированных
+					шапках) нужно добавить к объекту навигации атрибут <strong>data-goto-header:</strong></p>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);">&lt;a href=<span class="hljs-string" style="color: rgb(162, 252, 162);">"#"</span> data-<span class="hljs-keyword" style="color: rgb(252, 194, 140);">goto</span>-header data-<span class="hljs-keyword" style="color: rgb(252, 194, 140);">goto</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">".имя класса блока"</span> <span class="hljs-keyword" style="color: rgb(252, 194, 140);">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"link"</span>&gt;Пункт навигации&lt;/a&gt;</pre>
+				<p>Если нужно чтобы скролл не докручивал до блока на указанную высоту необходимо добавить к объекту
+					навигации атрибут <strong>data-goto-top</strong> а в качестве значения указать число — необходимую
+					высоту:
+				</p>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);">&lt;a href=<span class="hljs-string" style="color: rgb(162, 252, 162);">"#"</span> data-<span class="hljs-keyword" style="color: rgb(252, 194, 140);">goto</span>-top=<span class="hljs-string" style="color: rgb(162, 252, 162);">"30"</span> data-<span class="hljs-keyword" style="color: rgb(252, 194, 140);">goto</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"#id блока"</span> <span class="hljs-keyword" style="color: rgb(252, 194, 140);">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"link"</span>&gt;Пункт навигации&lt;/a&gt;</pre>
+				<p>data-goto-top можно совмещать с <strong>data-goto-header</strong>, тогда значение data-goto-top добавится
+					к высоте шапки.
+				</p>
+				<h3>Добавление класса к текущему пункту навигации
+				</h3>
+				<h4>Для включения функционала добавления класса подключаем модуль наблюдатель:
+				</h4>
+				<ul class="listsp">
+					<li><strong>[JS]</strong> В файле <strong>js/app.js</strong> раскомментировать строку <strong>import
+							‘./libs/watcher.js’</strong>
+					</li>
+					<li><strong>[HTML]</strong> Для блоков к которым прокручивается страница добавляем атрибут
+						<strong>data-watch</strong> со значением navigator:
+					</li>
+				</ul>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);">&lt;a href=<span class="hljs-string" style="color: rgb(162, 252, 162);">"#"</span> data-<span class="hljs-keyword" style="color: rgb(252, 194, 140);">goto</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">".some-section"</span> <span class="hljs-keyword" style="color: rgb(252, 194, 140);">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"link"</span>&gt;Пункт навигации&lt;/a&gt;</pre>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);">&lt;section data-watch=<span class="hljs-string" style="color: rgb(162, 252, 162);">"navigator"</span> <span class="hljs-class"><span class="hljs-keyword" style="color: rgb(252, 194, 140);">class</span></span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"some-section"</span>&gt;<span class="xml"><span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">section</span>&gt;</span></span></pre>
+				<p>После этого, при прокрутке к облоку (объекту) навигации, к соответствующему пункту навигации будет
+					добавлен класс <strong>_navigator-active</strong>
+				</p>
+				<h3>Прокрутка к нужному блоку по хешу (при открытии страницы)
+				</h3>
+				<p>Для того чтобы прокрутить страницу к нужному блоке при открытии страницы необходимо добавить к адресу хеш
+					содержащий <strong>имя класса нужного блока</strong>.
+				</p>
+				<p>Пример адресной строки и нужного блока:
+				</p>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);"><span class="hljs-symbol" style="color: rgb(211, 99, 99);">https:</span>//template.fls.guru/index.html<span class="hljs-meta" style="color: rgb(252, 155, 155);">#some-section</span></pre>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);">&lt;section <span class="hljs-class"><span class="hljs-keyword" style="color: rgb(252, 194, 140);">class</span></span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"some-section"</span>&gt; <span class="xml"><span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">section</span>&gt;</span></span></pre>
+				<h3>Добавление функционала, плавная прокрутка на iOS
+				</h3>
+				<p>По умолчанию, прокрутка выполняется методом scrollTo() с параметром behavior: «smooth» без применения
+					дополнительных плагинов. Но это ограничивает функционал этого модуля — нельзя указать скорость прокрутки,
+					а также могут возникнуть проблемы в некоторых версия браузеров на iOS. Для решения всех проблем, можно
+					подключить дополнительный плагин SmoothScroll, сделать это можно в файле js/files/scroll/gotoblock.js
+					раскомментировав строку import SmoothScroll from ‘smooth-scroll’; дальнейшее переключение прокрутки на
+					плагин произойдет автоматически.
+				</p>
+				<p>При работе с плагином появляется возможность указать скорость прокрутки, для этого элементу навигации
+					нужно добавить атрибут data-goto-speed и указать число означающее количество миллисекунд за которые
+					совершится прокрутка (1000 = 1 секунда), по умолчанию 500.
+				</p>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);">&lt;a href=<span class="hljs-string" style="color: rgb(162, 252, 162);">"#"</span> data-<span class="hljs-keyword" style="color: rgb(252, 194, 140);">goto</span>-speed=<span class="hljs-string" style="color: rgb(162, 252, 162);">"1000"</span> data-<span class="hljs-keyword" style="color: rgb(252, 194, 140);">goto</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">".some-section"</span> <span class="hljs-keyword" style="color: rgb(252, 194, 140);">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"link"</span>&gt;Пункт навигации&lt;/a&gt;</pre>
+				<h3>Расположение и дополнительные данные
+				</h3>
+				<p>Функционал находится в <strong>js/files/scroll/scroll.js</strong>. Название функции
+					<strong>pageNavigation()</strong>. Вспомогательный
+					модуль прокрутки <strong>gotoblock</strong> находится в <strong>js/files/scroll/gotoblock.js</strong>.
+					Модуль наблюдатель находится в файле
+					<strong>js/libs/watcher.js</strong>.
+				</p>
+				<p>Если в момент клика на пункт навигации было открыто меню «бургер», то оно закроется автоматически.
+				</p>
 			</div>
 
 			<div id="home11" class="home-menu">
 				<h1>Модуль добавления классов к шапке при прокрутке страницы</h1>
+				<p>Функционал позволяет добавлять класс к тегу header с классом header при прокрутке страницы вниз, а также
+					другой класс при остановке прокрутки. Таким образом, можно добиться эффекта когда при самом скролле вниз
+					шапка не видна, но стоит остановить скролл, как шапка плавно появляется вверху страницы (становится
+					фиксированной). При обратной прокрутке вверх шапка так же остается видна.
+				</p>
+				<p>Класс <strong>_header-scroll</strong> добавляется к шапке при скролле вниз (через указанное кол-во
+					пикселей).
+				</p>
+				<p>При остановке скролла добавляется класс <strong>_header-show</strong>.
+				</p>
+				<h3>Подключение функционала
+				</h3>
+				<p><strong>[JS]</strong> В файле <strong>js/app.js</strong> раскомментировать строку
+					<strong>flsScroll.headerScroll()</strong>;
+				</p>
+				<h3>Использование функционала
+				</h3>
+				<p><strong>[HTML]</strong> К тегу <strong>header</strong>, добавляем HTML-атрибут
+					<strong>data-scroll</strong>, в значении атрибута указываем через какое кол-во прокрученных вниз пикселей
+					нам необходимо добавить класс к header (обычно по высоте шапки, по умолчанию 1px).</p>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);">&lt;header data-scroll=<span class="hljs-string" style="color: rgb(162, 252, 162);">"120"</span> <span class="hljs-class"><span class="hljs-keyword" style="color: rgb(252, 194, 140);">class</span></span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"header"</span>&gt; <span class="xml"><span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">header</span>&gt;</span></span></pre>
+				<p>Теперь как только пользователь прокрутит вниз указанные выше 120px к header добавится технический класс
+					<strong>_header-scroll</strong>. Этот класс будет присутствовать до тех пор, пока пользователь не
+					вернется на самый вверх
+					(не доходя 120px).
+				</p>
+				<h4>Результат работы:</h4>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);">&lt;header data-scroll=<span class="hljs-string" style="color: rgb(162, 252, 162);">"120"</span> <span class="hljs-class"><span class="hljs-keyword" style="color: rgb(252, 194, 140);">class</span></span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"header _header-scroll"</span>&gt; <span class="xml"><span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">header</span>&gt;</span></span></pre>
+				<p><strong>[HTML]</strong> Далее к тегу header, добавляем еще один HTML-атрибут
+					<strong>data-scroll-show</strong>. Как только пользователь
+					остановит прокрутку к тегу header, через определенное время, добавится еще один технический класс
+					<strong>_header-show</strong>. Этот класс исчезает только в моменте прокрутке вниз. При прокрутке вверх
+					класс не исчезает.
+				</p>
+				<h4>Результат работы:</h4>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);">&lt;<span class="hljs-built_in" style="color: rgb(255, 255, 170);">header</span> data-<span class="hljs-keyword" style="color: rgb(252, 194, 140);">scroll</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"120"</span> data-<span class="hljs-keyword" style="color: rgb(252, 194, 140);">scroll</span>-<span class="hljs-keyword" style="color: rgb(252, 194, 140);">show</span> class=<span class="hljs-string" style="color: rgb(162, 252, 162);">"header _header-scroll _header-show"</span>&gt; &lt;/<span class="hljs-built_in" style="color: rgb(255, 255, 170);">header</span>&gt;</pre>
+				<p>Время задержки добавления класса <strong>_header-show</strong> можно менять. Для это следует указать
+					значение атрибута
+					<strong>data-scroll-show</strong> в миллисекундах (по умолчанию 500)</p>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);">&lt;<span class="hljs-built_in" style="color: rgb(255, 255, 170);">header</span> data-<span class="hljs-keyword" style="color: rgb(252, 194, 140);">scroll</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"120"</span> data-<span class="hljs-keyword" style="color: rgb(252, 194, 140);">scroll</span>-<span class="hljs-keyword" style="color: rgb(252, 194, 140);">show</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"1000"</span> class=<span class="hljs-string" style="color: rgb(162, 252, 162);">"header _header-scroll _header-show"</span>&gt; &lt;/<span class="hljs-built_in" style="color: rgb(255, 255, 170);">header</span>&gt;</pre>
+				<p><strong>[SCSS]</strong> Теперь осталось отредактировать свойства этих подключенных классов в scss.
+					Например:</p>
+				<img src="@img/image6.jpg" class="img-home">
+				<h3>Расположение и дополнительные данные
+				</h3>
+				<p>Функционал находится в <strong>js/files/scroll/scroll.js</strong>. Название функции
+					<strong>headerScroll()</strong>
+				</p>
+
+
 			</div>
 
-			<div id="home12" class="home-menu">
+			<div id=" home12" class="home-menu">
 				<h1>Модуль «Наблюдатель» за появлением элементов при прокрутке страницы (скролле)</h1>
+				<p>Модуль «Наблюдатель» можно использовать для решения самых разных задач: анимация элементов при скролле,
+					подсветка активного пункта меню (используется в модуле «Прокрутка к нужному блоку») и многих других.
+				</p>
+				<p>Суть работы наблюдателя заключается в добавлении класса <strong>_watcher-view</strong> элементу в момент
+					его появлении в
+					вьюпорте (экране) при скролле а также при открытии страницы. И, соответственно, убран при уходе объекта
+					из вьюпорта.
+				</p>
+				<h3>Подключение модуля
+				</h3>
+				<p><strong>[HTML]</strong> Для объекта, за которым нужно установить наблюдение, следует добавить атрибут
+					<strong>data-watch</strong>
+				</p>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);">&lt;div data-watch <span class="hljs-class"><span class="hljs-keyword" style="color: rgb(252, 194, 140);">class</span></span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"block"</span>&gt; <span class="xml"><span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">div</span>&gt;</span></span></pre>
+				<p><strong>[JS]</strong> В файле <strong>js/app.js</strong> раскомментировать строку import
+					<strong>‘./libs/watcher.js’</strong></p>
+				<h3>Дополнительные настройки:
+				</h3>
+				<ul class="listsp">
+					<li><strong>data-watch-root=’селектор’</strong> — селектор родителя внутри которого наблюдать за
+						объектом. По умолчанию
+						&lt;body&gt;
+					</li>
+					<li><strong>data-watch-margin=’значение’</strong> — отступ от родителя. Указываем значение в PX или в %
+					</li>
+					<li><strong>data-watch-threshold=’значение’</strong> — процент показа объекта для срабатывания. Где 1 =
+						100% показ
+						объекта. Указываем только целые или десятичные числа, по умолчанию 0. Может содержать массив значений
+						через запятую.
+					</li>
+					<li><strong>data-watch-once</strong> — наблюдать только один раз. То есть класс к объекту добавится
+						только один раз и не
+						будет убран при уходе объекта из вьюпорта.
+					</li>
+				</ul>
+				<p>Пример — класс добавится только один раз, при появлении объекта на 50% его высоты:</p>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);">&lt;div <span class="hljs-keyword" style="color: rgb(252, 194, 140);">data</span>-watch-threshold=<span class="hljs-string" style="color: rgb(162, 252, 162);">"0.5"</span> <span class="hljs-keyword" style="color: rgb(252, 194, 140);">data</span>-watch-once <span class="hljs-keyword" style="color: rgb(252, 194, 140);">data</span>-watch <span class="hljs-class"><span class="hljs-keyword" style="color: rgb(252, 194, 140);">class</span>="<span class="hljs-title" style="color: rgb(255, 255, 170);">block</span>"&gt; &lt;<span class="hljs-type" style="color: rgb(255, 255, 170);">/div</span>&gt;</span></pre>
+				<h3>События</h3>
+				<p>После каждом срабатывании наблюдателя, возникает событие <strong>watcherCallback</strong>, его можно
+					отловить в любой
+					части кода:
+				</p>
+
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);"><span class="hljs-built_in" style="color: rgb(255, 255, 170);">document</span>.addEventListener(<span class="hljs-string" style="color: rgb(162, 252, 162);">"watcherCallback"</span>, <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(252, 194, 140);">function</span> (<span class="hljs-params">e</span>) </span>{
+					<span class="hljs-comment" style="color: rgb(136, 136, 136);">// Полная информация от наблюдателя</span>
+					<span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> entry = e.detail.entry;
+					<span class="hljs-comment" style="color: rgb(136, 136, 136);">// Наблюдаемый объект</span>
+					<span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> targetElement = entry.target;
+				});</pre>
+
+				<h3>Расположение и дополнительные данные
+				</h3>
+				<p>Функционал находится в файле <strong>js/libs/watcher.js</strong>. Название класса
+					<strong>ScrollWatcher</strong>. Модуль построен на основе <a
+						href="https://developer.mozilla.org/ru/docs/Web/API/Intersection_Observer_API">Intersection Observer
+						API.</a>
+				</p>
+				<p>Модуль снабжен системой <strong>FLS</strong> и будет сообщать о своих действиях в консоль браузера</p>
+
+
+
 			</div>
 
 			<div id="home13" class="home-menu">
