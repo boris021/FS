@@ -863,15 +863,252 @@
 
 			<div id="home6" class="home-menu">
 				<h1>SCSS-Миксин «Отзывчивое (адаптивное) свойство»</h1>
+				<p>С помощью SCSS-миксина «Отзывчивое (адаптивное) свойство» можно отзывчиво (в зависимости ширины экрана)
+					изменять значение того или иного CSS-свойства от начального значения, на определенной ширине экрана, до
+					конечного значения на другой ширине экрана. Можно указывать произвольные промежутки ширин. Также,
+					существует несколько режимов поведения миксина вне указанных промежутках.
+				</p>
+				<p>Миксин представлен в двух реализациях — clamp() и calc(). Сlamp работает быстрее, но если возникают
+					проблемы с поддержкой браузерами миксин автоматически переключится на calc().
+				</p>
+				<p>Принудительно использовать calc() можно изменив код миксина в файле scss/base/mixins.scss
+				</p>
+				<h3>Использование миксина
+				</h3>
+				<p>Чтобы работать с миксином нужно в SCSS селекторе вызвать сниппет <strong>av:</strong>
+				</p>
+				<h4>Базовый режим работы миксина:</h4>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(34, 34, 34); color: rgb(170, 170, 170);">@<span class="hljs-keyword" style="color: rgb(102, 68, 170);">include</span> adaptiveValue(<span class="hljs-string" style="color: rgb(255, 204, 51);">"свойство"</span>, начальное значение, конечное значение);</pre>
+				<p>Где:</p>
+				<p><strong>свойство</strong> — CSS-свойство, значение которого нужно адаптировать. Можно указать любое
+					свойство значение которого указывается в цифрах.</p>
+				<p><strong>начальное значение</strong> — стартовое значение свойства в пикселях, пишем число без px. Обычно
+					указывается по макету.
+				</p>
+				<p><strong>конечное значение</strong> — финальное значение свойства в пикселях, пишем число без px.
+					Значение, к которому мы хотим прийти на меньших ширинах экрана.
+				</p>
+				<p>Примеры:
+				</p>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(34, 34, 34); color: rgb(170, 170, 170);">@<span class="hljs-keyword" style="color: rgb(102, 68, 170);">include</span> adaptiveValue(<span class="hljs-string" style="color: rgb(255, 204, 51);">"font-size"</span>, <span class="hljs-number" style="color: rgb(0, 204, 102);">50</span>, <span class="hljs-number" style="color: rgb(0, 204, 102);">20</span>);
+					@<span class="hljs-keyword" style="color: rgb(102, 68, 170);">include</span> adaptiveValue(<span class="hljs-string" style="color: rgb(255, 204, 51);">"padding-top"</span>, <span class="hljs-number" style="color: rgb(0, 204, 102);">80</span>, <span class="hljs-number" style="color: rgb(0, 204, 102);">10</span>);</pre>
+				<h3>Алгоритм работы миксина
+				</h3>
+				<p>Миксин работает на основе значений переменных <strong>$minWidth, $maxWidth, $maxWidthContainer,
+						$containerPadding
+						и $containerWidth</strong> расположенных в блоке «Настройка адаптивной сетки» файла scss/style.scss
+				</p>
+				<h4>В итоге, по умолчанию, миксин будет работать следующим образом:
+				</h4>
+				<p>Если <strong>$maxWidthContainer </strong> больше нуля, то значения свойства будут меняться в промежутке
+					ширин от
+					<strong>$containerWidth</strong> до <strong>$minWidth.</strong> То есть, по всей ширине ограничивающего
+					контейнера.
+				</p>
+				<p>При этом, если ширина экрана больше чем <strong>$containerWidth</strong>, то значение свойства будет
+					равно начальному значению. Если ширина экрана меньше чем <strong>$minWidth</strong>, то значение свойства
+					будет равно конечному значению.
+				</p>
+				<p>Если <strong>$maxWidthContainer</strong> равен нулю, то значения свойства будут меняться в промежутке
+					ширин от <strong>$maxWidth</strong> до <strong>$minWidth</strong>. То есть, по всей ширине экрана
+					(вьюпорта).
+				</p>
+				<h3>Дополнительные настройки и режимы работы
+				</h3>
+				<p>Миксин позволяет указать свой промежуток ширины внутри которого будет адаптироваться значение свойства.
+				</p>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(34, 34, 34); color: rgb(170, 170, 170);">@<span class="hljs-keyword" style="color: rgb(102, 68, 170);">include</span> adaptiveValue(<span class="hljs-string" style="color: rgb(255, 204, 51);">"свойство"</span>, начальное значение, конечное значение, ширина от, ширина до);</pre>
+				<ul class="listsp">
+					<li><strong>ширина от</strong> — стартовая ширина меньше которой начнется адаптация, пишем число без px.
+					</li>
+					<li><strong>ширина до</strong> — конечная ширина до которой будет адаптироваться значение свойства, пишем
+						число без px.
+					</li>
+				</ul>
+				<h4>Пример:
+				</h4>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(34, 34, 34); color: rgb(170, 170, 170);">@<span class="hljs-keyword" style="color: rgb(102, 68, 170);">include</span> adaptiveValue(<span class="hljs-string" style="color: rgb(255, 204, 51);">"font-size"</span>, <span class="hljs-number" style="color: rgb(0, 204, 102);">50</span>, <span class="hljs-number" style="color: rgb(0, 204, 102);">20</span>, <span class="hljs-number" style="color: rgb(0, 204, 102);">800</span>, <span class="hljs-number" style="color: rgb(0, 204, 102);">480</span>);</pre>
+				<p><strong>режим работы</strong> — может принимать числовые значения 1, 2 или 3:
+				</p>
+				<ul class="litsp">
+					<li><strong>1</strong> — Если ширина экрана больше чем ширина от, то значение свойства будет равно
+						начальному значению. Если ширина экрана меньше чем ширина до, то значение свойства будет равно
+						конечному значению.
+					</li>
+					<li><strong>2</strong> — Если ширина экрана больше чем ширина от, то значение свойства будет равно
+						начальному значению. Если ширина экрана меньше чем ширина до, то значение свойства будет по умолчанию
+						либо наследоваться от предков.</li>
+					<li><strong>3</strong> — Если ширина экрана больше чем ширина от, то значение свойства будет по умолчанию
+						либо наследоваться от предков. Если ширина экрана меньше чем ширина до, то значение свойства будет
+						равно конечному значению.
+					</li>
+				</ul>
+				<h4>Пример:
+				</h4>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(34, 34, 34); color: rgb(170, 170, 170);">@<span class="hljs-keyword" style="color: rgb(102, 68, 170);">include</span> adaptiveValue(<span class="hljs-string" style="color: rgb(255, 204, 51);">"font-size"</span>, <span class="hljs-number" style="color: rgb(0, 204, 102);">50</span>, <span class="hljs-number" style="color: rgb(0, 204, 102);">20</span>, <span class="hljs-number" style="color: rgb(0, 204, 102);">800</span>, <span class="hljs-number" style="color: rgb(0, 204, 102);">480</span>, <span class="hljs-number" style="color: rgb(0, 204, 102);">1</span>);
+				</pre>
+				<p>Также мы можем использовать несколько вызовов миксина с разными промежутками:</p>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(34, 34, 34); color: rgb(170, 170, 170);">@<span class="hljs-keyword" style="color: rgb(102, 68, 170);">include</span> adaptiveValue(<span class="hljs-string" style="color: rgb(255, 204, 51);">"font-size"</span>, <span class="hljs-number" style="color: rgb(0, 204, 102);">50</span>, <span class="hljs-number" style="color: rgb(0, 204, 102);">20</span>, <span class="hljs-number" style="color: rgb(0, 204, 102);">800</span>, <span class="hljs-number" style="color: rgb(0, 204, 102);">480</span>, <span class="hljs-number" style="color: rgb(0, 204, 102);">2</span>);
+					@<span class="hljs-keyword" style="color: rgb(102, 68, 170);">include</span> adaptiveValue(<span class="hljs-string" style="color: rgb(255, 204, 51);">"font-size"</span>, <span class="hljs-number" style="color: rgb(0, 204, 102);">20</span>, <span class="hljs-number" style="color: rgb(0, 204, 102);">10</span>, <span class="hljs-number" style="color: rgb(0, 204, 102);">480</span>, <span class="hljs-number" style="color: rgb(0, 204, 102);">320</span>);
+					</pre>
+				<p>В примере произойдет следующее: значение font-size будет 50px, в промежутке ширин экрана от 800px до
+					480px, он будет отзывчиво адаптироваться от 50px до 20px. А в промежутке от 480px до 320px отзывчиво
+					адаптироваться от 20px до 10px.
+				</p>
+				<h3>Расположение
+				</h3>
+				<p>Миксин <strong>adaptiveValue</strong> находится в файле <strong>scss/base/mixins.scss</strong>
+				</p>
 			</div>
 
 			<div id="home7" class="home-menu">
 				<h1>Модуль меню «бургер»</h1>
+				<p>Функционал реагирует на клик по кнопке меню «бургера» (элемент с классом icon-menu). При этом к тегу html
+					добавляется класс <strong>menu-open</strong>, а также срабатывает блокировка прокрутки страницы (функция
+					<strong>bodyLockToggle()</strong> ). При повторном клике происходят обратные действия.
+				</p>
+				<h3>Подключение модуля
+				</h3>
+				<ul class="listsp">
+					<li><strong>[HTML]</strong> Вызвать сниппет menu, отредактировать под задачу. Важно чтобы кнопка бургера
+						оставалась с
+						классом icon-menu
+					</li>
+					<li><strong>[JS]</strong> В файле <strong>js/app.js</strong> раскомментировать строку
+						<strong>flsFunctions.menuInit()</strong>;
+					</li>
+					<li><strong>[SCSS]</strong> По классу <strong>menu-open</strong> верстаем открытие меню. В файле
+						<strong>scss/header.scss</strong> есть закомментированный
+						стиль кнопки бургера.
+					</li>
+				</ul>
+				<h3>Расположение и дополнительные данные</h3>
+				<p>Функционал находится в <strong>js/files/functions.js</strong>. Название функции
+					<strong>menuInit()</strong>, дополнительные функции <strong>menuOpen()</strong> и
+					<strong>menuClose()</strong> для открытия/закрытия меню из произвольного кода. Все функции импортируемые.
+				</p>
+				<h4>Дополнительные материалы</h4>
+				<a
+					href="https://youtu.be/zs1r8yafTE8?list=PLM6XATa8CAG6IJvQBkrTTNZmpIcyS2Avk">https://youtu.be/zs1r8yafTE8?list=PLM6XATa8CAG6IJvQBkrTTNZmpIcyS2Avk</a>
+
 			</div>
 
 			<div id="home8" class="home-menu">
-				<h1>Модуль «Popup». Всплывающие (модальные) окна
-				</h1>
+				<h1>Модуль «Popup». Всплывающие (модальные) окна</h1>
+				<p>Данный функционал добавляет возможность использовать всплывающие окна. Работа модуля заключается в
+					следующем: пользователь нажимает на указанный элемент (по умолчанию это атрибут с указанным селектором
+					<strong>data-popup=‘selector‘)</strong>. При этом к тегу <strong>body</strong> добавляется класс
+					<strong>popup-show</strong>. Также блокируется прокрутка
+					страницы (можно отключить), фокусировка элементов «перелетает» на popup, с запоминанием предыдущего
+					сфокусированного элемента на странице. Закрытие popup происходит при клике на кнопку закрытия (по
+					умолчанию элемент с атрибутом <strong>data-close</strong> ), по клику на «пустом месте» (не на popup), по
+					нажатию кнопки <strong>ESC</strong>.
+				</p>
+				<h3>Подключение функционала
+				</h3>
+				<ul class="listsp">
+					<li><strong>[HTML]</strong> Подключить файл <strong>_popup.htm</strong>, после оболочки
+						<strong>wrapper</strong>, в HTML-файл страницы (уже подключен в home.html)</li>
+					<li><strong>[SCSS]</strong> Подключить файл <strong>scss/base/popup.scss</strong> в файл
+						<strong>scss/base.scss</strong> — раскомментировать сроку <strong>@import
+							‘base/popup’</strong>;
+					</li>
+					<li><strong>[JS]</strong> Подключить файл <strong>js/libs/popup.js</strong> в файле
+						<strong>js/app.js</strong> — раскомментировать строку <strong>import
+							‘./libs/popup.js’</strong>
+					</li>
+				</ul>
+				<h3>Использование функционала
+				</h3>
+				<p>Для того, чтобы вызвать попап, необходимо на странице ввести объект с дата-атрибутом, в котором указан
+					селектор (класс или id) всплывающего окна, на которое ссылаемся:
+				</p>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(34, 34, 34); color: rgb(170, 170, 170);">&lt;a href=<span class="hljs-string" style="color: rgb(255, 204, 51);">"#"</span> data-popup=<span class="hljs-string" style="color: rgb(255, 204, 51);">"#popup"</span> <span class="hljs-class"><span class="hljs-keyword" style="color: rgb(102, 68, 170);">class</span></span>=<span class="hljs-string" style="color: rgb(255, 204, 51);">"link"</span>&gt;Я открываю попап&lt;/a&gt;
+				</pre>
+				<p>Далее открыть файл <strong>html/_popup.htm</strong> , раскомментировать HTML-код подготовки попапа,
+					указать селектор (id или класс) по которому вызывается попап, изменить код под свои нужды.
+				</p>
+				<h4>В примере попап вызывается по id popup:</h4>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(34, 34, 34); color: rgb(170, 170, 170);">&lt;<span class="hljs-keyword" style="color: rgb(102, 68, 170);">div</span> <span class="hljs-built_in" style="color: rgb(50, 170, 238);">id</span>=<span class="hljs-string" style="color: rgb(255, 204, 51);">"popup"</span> aria-hidden=<span class="hljs-string" style="color: rgb(255, 204, 51);">"true"</span> <span class="hljs-built_in" style="color: rgb(50, 170, 238);">class</span>=<span class="hljs-string" style="color: rgb(255, 204, 51);">"popup"</span>&gt;
+					&lt;<span class="hljs-keyword" style="color: rgb(102, 68, 170);">div</span> <span class="hljs-built_in" style="color: rgb(50, 170, 238);">class</span>=<span class="hljs-string" style="color: rgb(255, 204, 51);">"popup__wrapper"</span>&gt;
+						&lt;<span class="hljs-keyword" style="color: rgb(102, 68, 170);">div</span> <span class="hljs-built_in" style="color: rgb(50, 170, 238);">class</span>=<span class="hljs-string" style="color: rgb(255, 204, 51);">"popup__content"</span>&gt;
+							&lt;button data-close type=<span class="hljs-string" style="color: rgb(255, 204, 51);">"button"</span> <span class="hljs-built_in" style="color: rgb(50, 170, 238);">class</span>=<span class="hljs-string" style="color: rgb(255, 204, 51);">"popup__close"</span>&gt;Закрыть&lt;/button&gt;
+							&lt;<span class="hljs-keyword" style="color: rgb(102, 68, 170);">div</span> <span class="hljs-built_in" style="color: rgb(50, 170, 238);">class</span>=<span class="hljs-string" style="color: rgb(255, 204, 51);">"popup__text"</span>&gt;
+				
+							&lt;/<span class="hljs-keyword" style="color: rgb(102, 68, 170);">div</span>&gt;
+						&lt;/<span class="hljs-keyword" style="color: rgb(102, 68, 170);">div</span>&gt;
+					&lt;/<span class="hljs-keyword" style="color: rgb(102, 68, 170);">div</span>&gt;
+				&lt;/<span class="hljs-keyword" style="color: rgb(102, 68, 170);">div</span>&gt;</pre>
+				<h3>Открытие YouTube видео в попапе</h3>
+				<p>Для того чтобы открыть видеоролик в попапе, следует добавить к кнопке, которая вызывает попап, атрибут
+					<strong>data-popup-youtube</strong>, а в качестве значения указать код ролика. Также следует указать
+					атрибут
+					<strong>data-popup-youtube-place</strong> для объекта в котором хотим вывести ролик (если атрибут
+					<strong>data-popup-youtube-place</strong>
+					не будет указан, ролик автоматически появится в объекте с классом <strong>popup__text</strong> ):
+				</p>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);">&lt;button <span class="hljs-class"><span class="hljs-keyword" style="color: rgb(252, 194, 140);">type</span></span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"button"</span> data-popup=<span class="hljs-string" style="color: rgb(162, 252, 162);">"#video"</span> data-popup-youtube=<span class="hljs-string" style="color: rgb(162, 252, 162);">"6S5Zw2WuyFE"</span>&gt;Видео&lt;/button&gt;
+					&lt;div id=<span class="hljs-string" style="color: rgb(162, 252, 162);">"video"</span> aria-hidden=<span class="hljs-string" style="color: rgb(162, 252, 162);">"true"</span> <span class="hljs-class"><span class="hljs-keyword" style="color: rgb(252, 194, 140);">class</span></span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"popup"</span>&gt;
+						&lt;div <span class="hljs-class"><span class="hljs-keyword" style="color: rgb(252, 194, 140);">class</span></span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"popup__wrapper"</span>&gt;
+							&lt;div <span class="hljs-class"><span class="hljs-keyword" style="color: rgb(252, 194, 140);">class</span></span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"popup__content"</span>&gt;
+								&lt;button data-close <span class="hljs-class"><span class="hljs-keyword" style="color: rgb(252, 194, 140);">type</span></span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"button"</span> <span class="hljs-class"><span class="hljs-keyword" style="color: rgb(252, 194, 140);">class</span></span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"popup__close"</span>&gt;Закрыть&lt;/button&gt;
+								&lt;div data-youtube-place <span class="hljs-class"><span class="hljs-keyword" style="color: rgb(252, 194, 140);">class</span></span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"popup__text"</span>&gt;
+					
+								&lt;/div&gt;
+							&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;</pre>
+				<p>Стили попапа можно писать и изменять в файле <strong>scss/base/popup.scss</strong>
+				</p>
+				<h3>Открытие попапа по хешу
+				</h3>
+				<p>Для того чтобы открыть попап при открытии страницы, добавляем к адресу хеш с именем селектора попапа</p>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);"><span class="hljs-symbol" style="color: rgb(211, 99, 99);">https:</span>//template.fls.guru/index.html<span class="hljs-meta" style="color: rgb(252, 155, 155);">#popup</span></pre>
+				<h3>Методы и события
+				</h3>
+				<h4>Методы</h4>
+				<p>Работать с попапом из любого места можно импортировать переменную <strong>flsModules</strong>:
+				</p>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);"><span class="hljs-keyword" style="color: rgb(252, 194, 140);">import</span> { flsModules } from <span class="hljs-string" style="color: rgb(162, 252, 162);">"./modules.js"</span>;
+					</pre>
+				<p>Далее обратится к классу <strong>popup</strong> и работать с методом, например <strong>open()</strong>
+				</p>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);">flsModules<span class="hljs-selector-class" style="color: rgb(173, 229, 252);">.popup</span><span class="hljs-selector-class" style="color: rgb(173, 229, 252);">.open</span>(<span class="hljs-string" style="color: rgb(162, 252, 162);">'#popup'</span>)
+					</pre>
+				<p>где <strong>#popup</strong> селектор попапа
+				</p>
+				<h4>События</h4>
+				<p>В классе попапов существуют ряд событий:
+				</p>
+				<ul class="listsp">
+					<li><strong>beforePopupOpen</strong> — сработает перед открытием попапа
+					</li>
+					<li><strong>afterPopupOpen</strong> — сработает после открытия попапа
+					</li>
+					<li><strong>beforePopupClose</strong> — сработает перед закрытием попапа
+					</li>
+					<li><strong>afterPopupClose</strong> — сработает после закрытия попапа
+					</li>
+				</ul>
+				<p>Чтобы работать с событием вешаем прослушку на document</p>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);"><span class="hljs-built_in" style="color: rgb(255, 255, 170);">document</span>.addEventListener(<span class="hljs-string" style="color: rgb(162, 252, 162);">"afterPopupOpen"</span>, <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(252, 194, 140);">function</span> (<span class="hljs-params">e</span>) </span>{
+					<span class="hljs-comment" style="color: rgb(136, 136, 136);">// Попап</span>
+					<span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> currentPopup = e.detail.popup;
+				});
+				</pre>
 			</div>
 
 			<div id="home9" class="home-menu">
