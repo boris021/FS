@@ -1351,14 +1351,132 @@
 						API.</a>
 				</p>
 				<p>Модуль снабжен системой <strong>FLS</strong> и будет сообщать о своих действиях в консоль браузера</p>
-
-
-
 			</div>
 
 			<div id="home13" class="home-menu">
 				<h1>Модуль «Показать ещё»
 				</h1>
+				<p>Модуль «Показать ещё» позволяет изначально скрыть часть текста или элементов списка показывая только
+					указанную высоту либо количество элементов. Есть возможность включать функционал на определенной ширине
+					экрана (брейкпоинте).
+				</p>
+				<h3>Подключение функционала</h3>
+				<p><strong>[HTML]</strong> В нужном месте вызвать сниппет <strong>showmore</strong> (классы заменить на
+					нужные). Либо вручную создать
+					структуру где для оболочки добавлен атрибут <strong>data-showmore</strong>, для дочернего элемента
+					<strong>data-showmore-content</strong> и
+					для кнопки <strong>data-showmore-button</strong>. Кнопку изначально нужно скрыть добавив атрибут
+					<strong>hidden</strong> и добавить два
+					тега &lt;span&gt; с текстом показа и скрытия контента:</p>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);"><span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">div</span> <span class="hljs-attr">data-showmore</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"block"</span>&gt;</span>
+						<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">div</span> <span class="hljs-attr">data-showmore-content</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"block__content"</span>&gt;</span><span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">div</span>&gt;</span>
+						<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">button</span> <span class="hljs-attr">hidden</span> <span class="hljs-attr">data-showmore-button</span> <span class="hljs-attr">type</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"button"</span>  <span class="hljs-attr">lass</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"block__more"</span>&gt;</span>
+						<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">span</span>&gt;</span>Показать еще<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">span</span>&gt;</span>
+						<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">span</span>&gt;</span>Скыть<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">span</span>&gt;</span>
+						<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">button</span>&gt;</span>
+						<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">div</span>&gt;</span></pre>
+				<p><strong>[JS]</strong> В файле <strong>js/app.js </strong> раскомментировать строку
+					<strong>flsFunctions.showMore();</strong>
+				</p>
+				<p><strong>[SCSS]</strong> Раскомментировать строку <strong>@import «base/showmore»;</strong> в файле
+					<strong>src/scss/base.scss</strong> — это подключит
+					базовые стили, отредактировать под свои нужды</p>
+				<h3>Использование функционала
+				</h3>
+				<p>В элемент с атрибутом <strong>data-showmore-content </strong> добавляем текст и прочий контент, либо,
+					если это список (UL/OL) элементы списка (LI).</p>
+				<p>В зависимости от того, какой контент используется (текст или элементы списка) указываем значение для
+					атрибута <strong>data-showmore:</strong></p>
+				<ul class="listsp">
+					<li><strong>size</strong> — ограничение по высоте блока (по умолчанию)
+					</li>
+					<li><strong>items</strong> — ограничение количества выводимых элементов списка</li>
+				</ul>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);"><span class="xml"><span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">div</span> <span class="hljs-attr">data-showmore</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"items"</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"block"</span>&gt;</span>
+					<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">ul</span> <span class="hljs-attr">data-showmore-content</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"block__content"</span>&gt;</span>
+						<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">li</span>&gt;</span>Пункт №1<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">li</span>&gt;</span>
+						<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">li</span>&gt;</span>Пункт №2<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">li</span>&gt;</span>
+						<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">li</span>&gt;</span>Пункт №3<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">li</span>&gt;</span>
+						<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">li</span>&gt;</span>Пункт №4<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">li</span>&gt;</span>
+						<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">li</span>&gt;</span>Пункт №5<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">li</span>&gt;</span>
+					<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">ul</span>&gt;</span>
+					<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">button</span> <span class="hljs-attr">hidden</span> <span class="hljs-attr">data-showmore-button</span> <span class="hljs-attr">type</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"button"</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"block__more"</span>&gt;</span>
+						<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">span</span>&gt;</span>Показать еще<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">span</span>&gt;</span>
+						<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">span</span>&gt;</span>Скыть<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">span</span>&gt;</span>
+					<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">button</span>&gt;</span>
+				<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">div</span>&gt;</span></span></pre>
+				<p>В зависимости от того, какой тип выбран, указываем значение для атрибута <strong>data-showmore-content
+						:</strong> </p>
+				<ul class="listsp">
+					<li><strong>Высота блока в пикселях</strong> (число без px, по умолчанию 150 )
+					</li>
+					<li><strong>Количество выводимых элементов списка </strong> (число, по умолчанию 3 )
+					</li>
+				</ul>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);"><span class="xml"><span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">div</span> <span class="hljs-attr">data-showmore</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"block"</span>&gt;</span>
+					<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">div</span> <span class="hljs-attr">data-showmore-content</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"200"</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"block__content"</span>&gt;</span>
+						Lorem ipsum dolor sit amet consectetur, adipisicing elit. Blanditiis explicabo 
+						voluptates magni culpa, perferendis vel quam consequuntur possimus, 
+						vero placeat quo enim obcaecati quas, veritatis magnam non. Architecto, 
+						porro voluptatum?
+					<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">div</span>&gt;</span>
+					<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">button</span> <span class="hljs-attr">hidden</span> <span class="hljs-attr">data-showmore-button</span> <span class="hljs-attr">type</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"button"</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"block__more"</span>&gt;</span>
+						<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">span</span>&gt;</span>Показать еще<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">span</span>&gt;</span>
+						<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">span</span>&gt;</span>Скыть<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">span</span>&gt;</span>
+					<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">button</span>&gt;</span>
+				<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">div</span>&gt;</span></span></pre>
+				<p>Если контента будет меньше чем указанное ограничение, кнопка «Показать ещё» <strong>не будет
+						показана</strong>. В
+					противном случае, контент ограничится по высоте либо по количеству элементов и при клике на кнопку будет
+					показан полностью, также, к элементу с атрибутом <strong>data-showmore</strong> добавится класс
+					<strong>_showmore-active</strong> (первый
+					спан в кнопке будет скрыт а второй показан). Повторный клик вернет ограничение.
+					Есть возможность управлять скоростью разворачивания контента, для этого следует указать значение атрибуту
+					<strong>data-showmore-button</strong> в миллисекундах (по умолчанию 500):
+				</p>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);"><span class="xml"><span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">div</span> <span class="hljs-attr">data-showmore</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"block"</span>&gt;</span>
+					<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">div</span> <span class="hljs-attr">data-showmore-content</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"200"</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"block__content"</span>&gt;</span>
+						Lorem ipsum dolor sit amet consectetur, adipisicing elit. Blanditiis explicabo 
+						voluptates magni culpa, perferendis vel quam consequuntur possimus, 
+						vero placeat quo enim obcaecati quas, veritatis magnam non. Architecto, 
+						porro voluptatum?
+					<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">div</span>&gt;</span>
+					<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">button</span> <span class="hljs-attr">hidden</span> <span class="hljs-attr">data-showmore-button</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"1000"</span> <span class="hljs-attr">type</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"button"</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"block__more"</span>&gt;</span>
+						<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">span</span>&gt;</span>Показать еще<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">span</span>&gt;</span>
+						<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">span</span>&gt;</span>Скыть<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">span</span>&gt;</span>
+					<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">button</span>&gt;</span>
+				<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">div</span>&gt;</span></span></pre>
+				<h3>Включение функционала на определенной ширине экрана
+				</h3>
+				<p>Для того чтобы использовать функционал на определенной ширине экрана, к объекту с атрибутом
+					<strong>data-showmore</strong> добавляем атрибут <strong>data-showmore-media</strong> где, через запятую,
+					указываем нужную ширину, а также тип:</p>
+				<ul class="listsp">
+					<li><strong>max</strong> (по умолчанию) — функционал включится на ширине меньшей чем указанная</li>
+					<li><strong>min</strong> — функционал включится на ширине большей чем указанная
+					</li>
+				</ul>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);"><span class="xml"><span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">div</span> <span class="hljs-attr">data-showmore</span> <span class="hljs-attr">data-showmore-media</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"768,min"</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"block"</span>&gt;</span>
+					<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">div</span> <span class="hljs-attr">data-showmore-content</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"200"</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"block__content"</span>&gt;</span>
+						Lorem ipsum dolor sit amet consectetur, adipisicing elit. Blanditiis explicabo 
+						voluptates magni culpa, perferendis vel quam consequuntur possimus, 
+						vero placeat quo enim obcaecati quas, veritatis magnam non. Architecto, 
+						porro voluptatum?
+					<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">div</span>&gt;</span>
+					<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">button</span> <span class="hljs-attr">hidden</span> <span class="hljs-attr">data-showmore-button</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"1000"</span> <span class="hljs-attr">type</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"button"</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"block__more"</span>&gt;</span>
+						<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">span</span>&gt;</span>Показать еще<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">span</span>&gt;</span>
+						<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">span</span>&gt;</span>Скыть<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">span</span>&gt;</span>
+					<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">button</span>&gt;</span>
+				<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">div</span>&gt;</span></span></pre>
+				<h3>Расположение и дополнительные данные</h3>
+				<p>Функционал находится в <strong>js/files/functions.js</strong>. Название функции
+					<strong>showMore()</strong>
+				</p>
 			</div>
 
 			<div id="home14" class="home-menu">
