@@ -399,7 +399,7 @@
 				<p>Для лучшего понимания установки Node.JS, GIT Bash, GULP, настройки псевдонимов посмотрите это
 					видео:
 				</p>
-				<a href="https://youtu.be/jU88mLuLWlk">https://youtu.be/jU88mLuLWlk</a>
+				<a class="links" href="https://youtu.be/jU88mLuLWlk">Смотреть видео</a>
 
 			</div>
 
@@ -993,7 +993,8 @@
 					<strong>menuClose()</strong> для открытия/закрытия меню из произвольного кода. Все функции импортируемые.
 				</p>
 				<h4>Дополнительные материалы</h4>
-				<a href="https://youtu.be/zs1r8yafTE8?list=PLM6XATa8CAG6IJvQBkrTTNZmpIcyS2Avk">Перейти</a>
+				<a class="links" href="https://youtu.be/zs1r8yafTE8?list=PLM6XATa8CAG6IJvQBkrTTNZmpIcyS2Avk">Смотреть
+					видео</a>
 
 			</div>
 
@@ -1135,7 +1136,7 @@
 				<p>У модуля есть ограничения, например, если перекидывать несколько объектов одновременно в один и тот же
 					блок, может возникнуть путаница с порядком блоков.</p>
 				<h3>Дополнительные материалы</h3>
-				<a href="https://youtu.be/QKuMr575vlQ">Перейти</a>
+				<a class="links" href="https://youtu.be/QKuMr575vlQ">Смотреть видео</a>
 
 			</div>
 
@@ -1482,15 +1483,238 @@
 			<div id="home14" class="home-menu">
 				<h1>Модуль «Табы»
 				</h1>
+				<p>Табы — это заголовки и соответствующие им блоки. Как правило, по умолчанию открыт только один блок
+					остальные скрыты. При клике на заголовок показывается соответствующий ему блок.
+				</p>
+				<h3>Основные возможности
+				</h3>
+				<ul class="listsp">
+					<li>Использование множества блоков с табами</li>
+					<li>Открытие нужного таба по хешу</li>
+					<li>Превращение табов в спойлеры на указанной ширине экрана (удобно для адаптива)</li>
+					<li>Возможность анимированного открытия табов</li>
+					<li>Семантика</li>
+				</ul>
+				<h3>Подключение функционала</h3>
+				<p><strong>[HTML]</strong> В нужном месте вызвать сниппет <strong>tabs</strong> (классы можно заменить на
+					нужные). Либо вручную создать
+					структуру с соответствующими дата-атрибутами. Обратите внимание, что добавление класса
+					<strong>_tab-active</strong> для
+					заголовка таба сделает таб активным (открытым)</p>
+				<h4>Пример блока с тремя табами:
+				</h4>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);">&lt;div data-tabs <span class="hljs-class"><span class="hljs-keyword" style="color: rgb(252, 194, 140);">class</span></span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"tabs"</span>&gt;
+					&lt;nav data-tabs-titles <span class="hljs-class"><span class="hljs-keyword" style="color: rgb(252, 194, 140);">class</span></span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"tabs__navigation"</span>&gt;
+						&lt;button <span class="hljs-class"><span class="hljs-keyword" style="color: rgb(252, 194, 140);">type</span></span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"button"</span> <span class="hljs-class"><span class="hljs-keyword" style="color: rgb(252, 194, 140);">class</span></span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"tabs__title _tab-active"</span>&gt;Таб №<span class="hljs-number" style="color: rgb(211, 99, 99);">1</span>&lt;/button&gt;
+						&lt;button <span class="hljs-class"><span class="hljs-keyword" style="color: rgb(252, 194, 140);">type</span></span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"button"</span> <span class="hljs-class"><span class="hljs-keyword" style="color: rgb(252, 194, 140);">class</span></span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"tabs__title"</span>&gt;Таб №<span class="hljs-number" style="color: rgb(211, 99, 99);">2</span>&lt;/button&gt;
+						&lt;button <span class="hljs-class"><span class="hljs-keyword" style="color: rgb(252, 194, 140);">type</span></span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"button"</span> <span class="hljs-class"><span class="hljs-keyword" style="color: rgb(252, 194, 140);">class</span></span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"tabs__title"</span>&gt;Таб №<span class="hljs-number" style="color: rgb(211, 99, 99);">3</span>&lt;/button&gt;
+					&lt;/nav&gt;
+					&lt;div data-tabs-body <span class="hljs-class"><span class="hljs-keyword" style="color: rgb(252, 194, 140);">class</span></span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"tabs__content"</span>&gt;
+						&lt;div <span class="hljs-class"><span class="hljs-keyword" style="color: rgb(252, 194, 140);">class</span></span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"tabs__body"</span>&gt;
+							Содержимое первого таба
+						&lt;/div&gt;
+						&lt;div <span class="hljs-class"><span class="hljs-keyword" style="color: rgb(252, 194, 140);">class</span></span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"tabs__body"</span>&gt;
+							Содержимое второго таба
+						&lt;/div&gt;
+						&lt;div <span class="hljs-class"><span class="hljs-keyword" style="color: rgb(252, 194, 140);">class</span></span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"tabs__body"</span>&gt;
+							Содержимое третьего таба
+						&lt;/div&gt;
+					&lt;/div&gt;
+				&lt;/div&gt;</pre>
+				<p><strong>[JS]</strong> В файле <strong>js/app.js</strong> раскомментировать строку
+					<strong>flsFunctions.tabs();</strong>
+				</p>
+				<p><strong>[SCSS]</strong> (не обязательно) Если вы хотите сразу посмотреть на работу табов и оставили
+					классы предложенные сниппетом, вы можете раскомментировать строку <strong>@import «base/tabs»;</strong> в
+					файле <strong>src/scss/base.scss</strong> — это подключит базовые стили, их можно отредактировать под
+					свои нужды.
+				</p>
+				<h3>Использование функционала</h3>
+				<h4>Превращение табов в спойлеры
+				</h4>
+				<p>Для того, чтобы табы превращались в спойлеры, необходимо для элемента с атрибутом
+					<strong>data-tabs</strong> указать значение ширины экрана ниже которой произойдет превращение:
+				</p>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);">&lt;div data-tabs=<span class="hljs-string" style="color: rgb(162, 252, 162);">"768"</span> <span class="hljs-class"><span class="hljs-keyword" style="color: rgb(252, 194, 140);">class</span></span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"tabs"</span>&gt;
+					<span class="xml"><span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">div</span>&gt;</span></span></pre>
+				<p>В момент превращения, к объекту с атрибутом <strong>data-tabs</strong> добавится класс
+					<strong>_tab-spoller</strong>, по которому можно изменить стили для нового представления табов-спойлеров.
+				</p>
+				<h3>Открытие нужного таба по хешу
+				</h3>
+				<p>Если есть необходимость открывать конкретный таб в конкретном блоке табов при открытии страницы по хешу,
+					необходимо, для элемента с атрибутом <strong>data-tabs</strong>, добавить атрибут
+					<strong>data-tabs-hash</strong>:
+				</p>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);">&lt;div data-tabs data-tabs-hash <span class="hljs-class"><span class="hljs-keyword" style="color: rgb(252, 194, 140);">class</span></span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"tabs"</span>&gt;
+					<span class="xml"><span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">div</span>&gt;</span></span></pre>
+				<p>Теперь, при клике на заголовки табов, к адресу страницы будет добавляться хеш вида:
+					<strong>#tab-0-1</strong>, где 0 — это идентификатор блока с табами, а 1 — идентификатор таба в этом
+					блоке.</p>
+				<p>Соответственно, перейдя на страницу с хешем #tab-0-1 откроется второй таб в первом блоке с табами. При
+					#tab-2-0 откроется первый таб в третьем блоке с табами и т.д.</p>
+				<h3>Анимация при открытии таба
+				</h3>
+				<p>Для того, чтобы табы открывались плавно, необходимо объекту с атрибутом <strong>data-tabs</strong>,
+					добавить атрибут <strong>data-tabs-animate</strong>, а в качестве значения указать количество миллисекунд
+					за которые откроется таб (по умолчанию 500).</p>
+
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);"><span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">div</span> <span class="hljs-attr">data-tabs</span> <span class="hljs-attr">data-tabs-animate</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"1000"</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"tabs"</span>&gt;</span>
+						<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">div</span>&gt;</span></pre>
+
+
+				<h3>Расположение и дополнительные данные</h3>
+				<p>Функционал находится в <strong>js/files/functions.js</strong>. Название функции <strong>tabs()</strong>
+				</p>
 			</div>
 
 			<div id="home15" class="home-menu">
 				<h1>Модуль «Спойлеры»
 				</h1>
+				<p>Спойлер — это заголовок, при клике на который под ним разворачивается некий контент.
+				</p>
+				<h3>Основные возможности
+				</h3>
+				<ul class="listsp">
+					<li>Использование множества блоков со спойлерами</li>
+					<li>Отключение/включение функционала на определенной ширине экрана
+					</li>
+					<li>Функция «аккордеон», когда в блоке может быть открыт только один спойлер
+					</li>
+					<li>Возможность анимированного открытия
+					</li>
+					<li>Семантика</li>
+				</ul>
+				<h3>Подключение функционала
+				</h3>
+				<p><strong>[HTML]</strong> В нужном месте вызвать сниппет <strong>spollers</strong> (классы можно заменить
+					на нужные). Либо вручную создать
+					структуру с соответствующими дата-атрибутами. Обратите внимание, что добавление класса <strong>
+						_spoller-active</strong>
+					для элемента с атрибутом <strong>data-spoller</strong> сделает спойлер активным (открытым).
+				</p>
+				<h4>Пример блока с двумя спойлерами:
+				</h4>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);"><span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">div</span> <span class="hljs-attr">data-spollers</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"spollers"</span>&gt;</span>
+					<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"spollers__item"</span>&gt;</span>
+						<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"button"</span> <span class="hljs-attr">data-spoller</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"spollers__title"</span>&gt;</span>
+							Заголовок спойлера №1
+						<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">button</span>&gt;</span>
+						<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"spollers__body"</span>&gt;</span>Контент спойлера №1<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">div</span>&gt;</span>
+					<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">div</span>&gt;</span>
+					<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"spollers__item"</span>&gt;</span>
+						<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"button"</span> <span class="hljs-attr">data-spoller</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"spollers__title"</span>&gt;</span>
+							Заголовок спойлера №2
+						<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">button</span>&gt;</span>
+						<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"spollers__body"</span>&gt;</span>Контент спойлера №2<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">div</span>&gt;</span>
+					<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">div</span>&gt;</span>
+				<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">div</span>&gt;</span></pre>
+				<p><strong>[JS]</strong> В файле <strong>js/app.js</strong> раскомментировать строку
+					<strong>flsFunctions.spollers();</strong>
+				</p>
+				<p><strong>[SCSS]</strong> (не обязательно) Если вы хотите сразу посмотреть на работу спойлеров и оставили
+					классы предложенные сниппетом, вы можете раскомментировать строку <strong>@import
+						«base/spollers»;</strong> в файле <strong>src/scss/base.scss</strong> — это подключит базовые стили,
+					их можно отредактировать под свои нужды.
+				</p>
+				<p>В момент инициализации (включения) функционала спойлера, контент будет скрыт, а к элементу с атрибутом
+					<strong>data-spollers</strong> будет добавлен класс <strong>_spoller-init</strong>
+				</p>
+				<h3>Использование функционала
+				</h3>
+				<h4>Отключение/включение функционала на определенной ширине экрана
+				</h4>
+				<p>Для того, чтобы отключить/включить функционал спойлера на определенной ширине экрана, необходимо для
+					атрибута <strong>data-spollers</strong> через запятую указать нужную ширину экрана а также тип:
+				</p>
+				<ul class="listsp">
+					<li>
+						<strong>max</strong> (по умолчанию) — функционал включится на ширине меньшей чем указанная
+					</li>
+					<li><strong>min</strong> — функционал включится на ширине большей чем указанная</li>
+				</ul>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);"><span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">div</span> <span class="hljs-attr">data-spollers</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"768,min"</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"spollers"</span>&gt;</span>
+					<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">div</span>&gt;</span></pre>
+				<h3>Включение режима «аккордеон»
+				</h3>
+				<p>Для того, чтобы включить режим «аккордеон», необходимо для элемента с атрибутом
+					<strong>data-spollers</strong> добавить
+					атрибут <strong>data-one-spoller</strong>
+				</p>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);"><span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">div</span> <span class="hljs-attr">data-spollers</span> <span class="hljs-attr">data-one-spoller</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"spollers"</span>&gt;</span>
+					<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">div</span>&gt;</span></pre>
+				<p>Для того, чтобы управлять временем анимации открытия/закрытия спойлера, необходимо для элемента с
+					атрибутом <strong>data-spollers</strong> добавить атрибут <strong>data-spollers-speed</strong> , а в
+					качестве значения указать время
+					анимации в миллисекундах (по умолчанию 500).</p>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);"><span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">div</span> <span class="hljs-attr">data-spollers</span> <span class="hljs-attr">data-spollers-speed</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"1000"</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"spollers"</span>&gt;</span>
+						<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">div</span>&gt;</span></pre>
+				<h3>Закрытие при клике вне спойлера
+				</h3>
+				<p>Если необходимо закрывать спойлер(ы) при клике вне блока («на пустом месте»), то следует добавить нужному
+					заголовку(кам) атрибут <strong>data-spoller-close</strong>
+				</p>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);"><span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">div</span> <span class="hljs-attr">data-spollers</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"spollers"</span>&gt;</span>
+	<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"spollers__item"</span>&gt;</span>
+		<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"button"</span> <span class="hljs-attr">data-spoller</span> <span class="hljs-attr">data-spoller-close</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"spollers__title"</span>&gt;</span>Заголовок спойлера<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">button</span>&gt;</span>
+		<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"spollers__body"</span>&gt;</span>Контент спойлера<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">div</span>&gt;</span>
+	<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">div</span>&gt;</span>
+<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">div</span>&gt;</span></pre>
+				<h3>Расположение и дополнительные данные</h3>
+				<p>Функционал находится в <strong>js/files/functions.js</strong>. Название функции
+					<strong>spollers()</strong>
+				</p>
+				<h3>Дополнительные материалы
+				</h3>
+				<a class="links" href="https://youtu.be/0fg9bZcL1RM?list=PLM6XATa8CAG6IJvQBkrTTNZmpIcyS2Avk
+">Смотреть видео</a>
 			</div>
 
 			<div id="home16" class="home-menu">
 				<h1>Модуль «Ленивая подгрузка» (Lazy Loading)</h1>
+				<p>Модуль «Ленивая подгрузка» позволяет подгружать изображения, а также содержимое тегов iframe video audio
+					только при доскролливании к элементу. Это существенно повышает скорость загрузки страницы.
+				</p>
+				<h3>Подключение функционала
+				</h3>
+				<p><strong>[HTML]</strong> Для подключения картинки с ленивой подгрузкой, в нужном месте следйет вызвать
+					сниппет <strong>imgl</strong>, что выведет тег &lt;img&gt; но вместо атрибута src будет атрибут
+					<strong>data-src</strong>.
+				</p>
+				<p>При выводе других тегов (iframe video audio) также следует заменить src на data-src.
+				</p>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);"><span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">img</span> <span class="hljs-attr">data-src</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"@img/cover.jpg"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">""</span>&gt;</span></pre>
+				<p>Во время режима продакшн, система распознает data-src и изменит для подключаемого webp-файла атрибут на
+					data-srcset
+				</p>
+				<p><strong>[JS]</strong> В файле <strong>js/app.js</strong> раскомментировать строку <strong>import
+						‘./files/scroll/lazyload.js’</strong>;
+				</p>
+				<h3>Работа функционала
+				</h3>
+				<p>В момент доскроливания до объекта с атрибутом <strong>data-src</strong> либо <strong>data-srcset</strong>
+					модуль подгрузит данные (переместит подключение в атрибут src/srcset), а также добавит к объекту класс
+					<strong>_lazy-loaded</strong> и атрибут <strong>data-ll-status</strong> со значением loaded
+				</p>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);"><span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">img</span> <span class="hljs-attr">data-src</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"img/cover.jpg"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">""</span> <span class="hljs-attr">loading</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"lazy"</span> <span class="hljs-attr">src</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"img/cover.jpg"</span> <span class="hljs-attr">data-ll-status</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"loaded"</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"_lazy-loaded"</span>&gt;</span></pre>
+				<h3>Расположение и дополнительные данные
+				</h3>
+				<p>Модуль работает на основе плагина <strong>vanilla-lazyload.js</strong> . Подключение и настройки плагина
+					находится в <strong>js/files/scroll/lazyload.js</strong>. Для более тонких настроек читайте <a
+						href="https://github.com/verlok/vanilla-lazyload">полную
+						документацию плагина.</a>
+				</p>
 			</div>
 
 			<div id="home17" class="home-menu">
