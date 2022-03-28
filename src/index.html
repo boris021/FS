@@ -1720,19 +1720,462 @@
 			<div id="home17" class="home-menu">
 				<h1>Модуль слайдера «Swiper»
 				</h1>
+				<p><strong>[HTML]</strong> Существует два сниппета для построения HTML-структуры слайдера:
+				</p>
+				<ul class="listsp">
+					<li><strong>swiper</strong> — строит минимальную структуру с уже добавленными классами слайдера (для
+						более опытных)
+					</li>
+					<li><strong>swiperfull</strong> — строит полную структуру слайдера с добавлением всех возможных элементов
+						управления (кнопки «влево/вправо», скролл, пагинация (булеты)) с уже добавленными классами слайдера.
+						Весь код сопровождается комментариями (для новичков).
+					</li>
+				</ul>
+				<p><strong>[JS]</strong> В файле <strong>js/app.js</strong> раскомментировать строку import
+					<strong>«./files/sliders.js»</strong>;
+				</p>
+				<p>В файле <strong>js/files/sliders.js</strong> выполняется подключение самого слайдера «Swiper» из NPM
+					пакета (подключено по умолчанию)
+				</p>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);">import Swiper, { Navigation } from 'swiper';</pre>
+				<p>При необходимости, можно подключить больше нужных модулей:
+				</p>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);">import Swiper, { Navigation, Pagination, Lazy, Autoplay } from 'swiper';</pre>
+				<p>Полный список модулей — <a href="https://swiperjs.com/swiper-api#using-js-modules">тут</a>
+				</p>
+				<p>Также, ниже по коду, есть пример-подготовка для создания конкретного слайдера (функция
+					<strong>initSliders()</strong>;)
+					Тут мы создаем и настраиваем нужные нам слайдеры, не забываем указывать модули для конкретного слайдера:
+				</p>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);">new Swiper('.swiper', {
+					modules: [Navigation, Autoplay],
+				}</pre>
+				<p><strong>[SCSS]</strong> По умолчанию, в файле <strong>js/files/sliders.js</strong> подключены базовые,
+					минимально необходимые для работы,
+					стили слайдера import <strong>«../../scss/base/swiper.scss»</strong>; (для более опытных). Также есть
+					возможность
+					подключить (расскоментировав строку) полные стили слайдера из файла
+					<strong>scss/libs/swiper.scss</strong> или из пакета
+					<strong>import ‘swiper/css’;</strong> (для начинающих)
+				</p>
 			</div>
 
 			<div id="home18" class="home-menu">
 				<h1>Работа с формами и элементами форм</h1>
+				<p>В этом документе описан общий функционал работы с полями, плейсхолдерами, валидацией, вариантами отправки
+					форм и т.д. В отдельных разделах будет описан функционал конкретных элементов форм, таких как:
+				</p>
+				<ul class="listsp">
+					<li>Отправка писем на почту (PHPMailer)</li>
+					<li>Кастомизация элемента SELECT</li>
+					<li>Кастомизация (стилизация) элементов CHECKBOX и RADIO
+					</li>
+					<li>Модуль «Маски» для полей ввода
+					</li>
+					<li>Модуль «Звездный рейтинг»
+					</li>
+					<li>Модуль «Количество»
+					</li>
+					<li>Модуль «Range» (ползунок)
+					</li>
+				</ul>
+				<h3>Работа с полями форм</h3>
+				<h4>Работа с полями форм подразумевает под собой следующий функционал:
+				</h4>
+				<ul class="listsp">
+					<li>Скрытие placeholder при фокусе
+					</li>
+					<li>Добавление классов полю и его родителю при фокусе
+					</li>
+					<li>Функционал «Показать пароль» для полей с типом password
+					</li>
+					<li>Возможность моментальной валидации поля при потере фокуса
+					</li>
+				</ul>
+				<p>Для того чтобы подключить общий функционал для работы с полями форм необходимо раскомментировать функцию
+					<strong>flsForms.formFieldsInit({…})</strong> в файле <strong>js/app.js</strong>:
+				</p>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);">flsForms.formFieldsInit({
+					viewPass: false, 
+				});</pre>
+				<h3>Передавать функции можно следующие параметры:
+				</h3>
+				<p><strong>viewPass</strong> — позволяет включить функционал «Показать пароль» . <strong>true</strong> —
+					включено, <strong>false</strong>
+					— выключено (по
+					умолчанию).</p>
+				<h3>Работа с атрибутом placeholder
+				</h3>
+				<p>По умолчанию, после подключения <strong>flsForms.formFieldsInit({…})</strong>, значение добавленного полю
+					HTML-атрибута
+					<strong>placeholder</strong> копируется в созданный скриптом атрибут <strong>data-placeholder</strong>,
+					что позволит скрывать плейсхолдер
+					при фокусе на поле. Если нам нужно отключить скрытие для конкретного поля, ему следует добавить атрибут
+					<strong>data-placeholder-nohide</strong>
+				</p>
+				<h3>Добавление классов</h3>
+				<p>По умолчанию, после подключения <strong>flsForms.formFieldsInit({…})</strong>, при возникновении фокуса,
+					к полю а также к его непосредственному родительскому элементу, добавится класс
+					<strong>_form-focus</strong>. Если нам нужно отключить добавление классов для конкретного поля, ему
+					следует добавить атрибут <strong>data-no-focus-classes</strong></p>
+				<h3>Валидация поля при потере фокуса
+				</h3>
+				<p>Для того чтобы скрипт начал вызывать функционал валидации поля в момент потери им фокуса, следует
+					добавить полю атрибут <strong>data-validate</strong>.
+				</p>
+				<p>Стоит добавить, что функционал работы с полями форм также удалит ошибку добавленную к полю валидатором
+					при получении им фокуса. Подробнее о функционале валидации полей смотри далее в этом документе.</p>
+				<h3>Функционал «Показать пароль»
+				</h3>
+				<p>Функционал «Показать пароль», позволяет отображать зашифрованное значение поля с типом password при клике
+					на объект с классом содержащим строку «__viewpass» который находится вместе с полем в одном родителе:
+				</p>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);"><span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">form</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"form"</span> <span class="hljs-attr">action</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"#"</span>&gt;</span>
+					<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"form__line"</span>&gt;</span>
+						<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">input</span> <span class="hljs-attr">autocomplete</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"off"</span> <span class="hljs-attr">type</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"password"</span> <span class="hljs-attr">name</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"form[]"</span> <span class="hljs-attr">value</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"123456"</span>&gt;</span>
+						<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"form__viewpass"</span> <span class="hljs-attr">type</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"button"</span>&gt;</span>Показать пароль<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">button</span>&gt;</span>
+					<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">div</span>&gt;</span>
+					<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"submit"</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"button"</span>&gt;</span>Отправить<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">button</span>&gt;</span>
+				<span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">form</span>&gt;</span></pre>
+				<p>В момент клика на объект с классом содержащим строку <strong>«__viewpass»</strong> в нему добавляется
+					класс
+					<strong></strong>, а тип поля ввода меняется на text. Повторное нажатие выполняет обратные действия.
+				</p>
+				<p>Напомню, для того чтобы включить функционал «Показать пароль» следует указать true для параметра viewPass
+					при подключении функционала в файле <strong>js/app.js</strong>.
+				</p>
+				<h3>Валидация элементов форм</h3>
+				<p>Для того чтобы элемент формы начал проходить валидацию, ему следует добавить атрибут
+					<strong>data-required</strong>. Теперь при отправке формы (если включена валидация), а также если
+					элементу добавлен атрибут <strong>data-validate</strong>, он будет проверяться на предмет заполнения.
+				</p>
+				<p>Для того чтобы включить особые правила валидации поля, атрибуту следует добавить одно из значений:
+				</p>
+				<ul class="listsp">
+					<li><strong>email</strong> — включит валидацию на ввод корректного E-mail
+					</li>
+				</ul>
+				<h4>Пример:
+				</h4>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);"><span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">input</span> <span class="hljs-attr">data-required</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"email"</span> <span class="hljs-attr">type</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"text"</span> <span class="hljs-attr">name</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"form[]"</span>&gt;</span></pre>
+				<p>Если элемент заполнен не верно, к нему, а также к его родителю добавится класс
+					<strong>_form-error</strong>. Если мы хотим
+					дополнительно вывести произвольный текст ошибки, нам следует указать его в атрибуте
+					<strong>data-error</strong> и добавить
+					к полю:
+				</p>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);"><span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">input</span> <span class="hljs-attr">data-error</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"Введен не верный E-mail"</span> <span class="hljs-attr">data-required</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"email"</span> <span class="hljs-attr">type</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"text"</span> <span class="hljs-attr">name</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"form[]"</span>&gt;</span></pre>
+				<p>Теперь, при возникновении ошибки валидации, под элементом добавится объект с классом
+					<strong>form__error</strong> содержащий ваш текст ошибки.
+				</p>
+				<p>Напомню, что функционал работы с полями удалит классы ошибок и объект с классом
+					<strong>form__error</strong> при получении
+					полем фокуса.
+				</p>
+				<h3>Отправка форм
+				</h3>
+				<p>Для включения функционала следует раскомментировать функцию <strong>flsForms.formSubmit()</strong>; в
+					файле <strong>js/app.js</strong>
+				</p>
+				<h3>Валидация элементов формы</h3>
+				<p>По умолчанию, при отправке формы, поля отмеченные <strong>data-required/data-required=’…’</strong> будут
+					проходить
+					валидацию. Для отключения валидации элементов конкретной формы, ей следует добавить атрибут
+					<strong>data-no-validate</strong>
+				</p>
+				<h3>Режимы отправки формы
+				</h3>
+				<h4>В ЧФ существует несколько режимов контроля отправки форм:
+				</h4>
+				<ul class="listsp">
+					<li><strong>Стандартная HTML отправка формы</strong> (по умолчанию) — если валидация пройдена (была
+						включена), форма
+						отправится на указанный в атрибуте action адрес (с переходом страницы), методом указанным в атрибуте
+						method.
+					</li>
+					<li><strong>AJAX отправка формы</strong> — если валидация пройдена (была включена), форма отправится AJAX
+						запросом на указанный в атрибуте action адрес, методом указанным в атрибуте method. Страница не
+						перезагрузится, все элементы формы вернутся к исходных значениям (очистка формы).
+					</li>
+					<li><strong>Режим имитации отправки формы</strong> — если валидация пройдена (была включена), форма
+						никуда не отправится, страница не перезагрузится, все элементы формы вернутся к исходных значениям
+						(очистка формы). Используется для демонстрации работы дополнительных возможностей форм, таких как,
+						например, показ попапа об успешной отправке.
+					</li>
+				</ul>
+				<p>Для включения режима <strong>AJAX отправки</strong> достаточно добавить форме атрибут
+					<strong>data-ajax</strong>, а если нужен режим
+					имитации отправки добавляем атрибут <strong>data-dev</strong>.
+				</p>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);"><span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">form</span> <span class="hljs-attr">data-ajax</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"form"</span> <span class="hljs-attr">method</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"POST"</span> <span class="hljs-attr">action</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"sendmail.php"</span>&gt;</span><span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">form</span>&gt;</span></pre>
+				<h3>Прокрутка к элементу с ошибкой
+				</h3>
+				<p>Бывает, что форма очень большая и, при возникновении ошибки валидации, хорошо бы показать элемент с
+					ошибкой пользователю. Для этих целей есть функционал «прокрутка к элементу с ошибкой». Для включения,
+					достаточно добавить форме атрибут <strong>data-goto-error</strong>
+				</p>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);"><span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">form</span> <span class="hljs-attr">data-goto-error</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"form"</span> <span class="hljs-attr">action</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"#"</span>&gt;</span><span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">form</span>&gt;</span></pre>
+				<h3>Показ попапа после отправки формы
+				</h3>
+				<p>Если необходимо, после отправки формы, показать попап добавляем к форме атрибут data-popup-message и в
+					качестве значения указываем селектор попапа
+				</p>
+				<p>Только для режимов <strong>data-ajax</strong> или <strong> data-dev</strong>. Функционал попапов также
+					должен быть подключен</p>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);"><span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">form</span> <span class="hljs-attr">data-dev</span> <span class="hljs-attr">data-popup-message</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"#form-message"</span> <span class="hljs-attr">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"form"</span> <span class="hljs-attr">action</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"#"</span>&gt;</span><span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">form</span>&gt;</span></pre>
+				<h3>События</h3>
+				<p>После каждой отправки формы срабатывает событие <strong>formSent</strong>, его можно отловить в любой
+					части кода:
+				</p>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);"><span class="hljs-built_in" style="color: rgb(255, 255, 170);">document</span>.addEventListener(<span class="hljs-string" style="color: rgb(162, 252, 162);">"formSent"</span>, <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(252, 194, 140);">function</span> (<span class="hljs-params">e</span>) </span>{
+					<span class="hljs-comment" style="color: rgb(136, 136, 136);">// Форма</span>
+					<span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> currentForm= e.detail.form;
+				});
+				</pre>
+				<h3>Расположение и дополнительные данные
+				</h3>
+				<p>Функции <strong>formFieldsInit()</strong>, <strong>formSubmit()</strong> а также объект
+					<strong>formValidate</strong> находятся в файле
+					<strong>js/files/forms/form.js</strong>
+				</p>
+
 			</div>
 
 			<div id="home19" class="home-menu">
 				<h1>Модуль кастомизации элемента SELECT
 				</h1>
+				<p>Модуль позволяет как угодно стилизовать стандартный элемент форы SELECT и его пункты OPTION, а также
+					реализует дополнительные возможности.
+				</p>
+				<h3>Подключение модуля
+				</h3>
+				<p><strong>[HTML]</strong> В нужном месте вызвать сниппет <strong>sel</strong>, отредактировать HTML-код
+					селекта под свои нужды</p>
+				<p><strong>[SCSS]</strong> Раскомментировать строку <strong>@import «select»;</strong> в файле
+					<strong>src/scss/base/forms/forms.scss</strong> — это подключит базовые стили селекта, отредактировать
+					под свои нужды</p>
+				<p><strong>[JS]</strong> Раскомментировать строку <strong>import ‘./libs/select.js’</strong> в файле
+					<strong>js/app.js</strong>
+				</p>
+				<h3>Настройки и функционал модуля
+				</h3>
+				<p>Для подключения того или иного функционала модуля используются различные HTML-атрибуты
+				</p>
+				<h3>Атрибуты для тега SELECT:
+				</h3>
+				<ul class="listsp">
+					<li><strong>class=имя класса</strong> — модификатор к конкретному селекту. В итоге получится select
+						select_имя класса
+					</li>
+					<li><strong>multiple</strong> — мультивыбор
+					</li>
+					<li><strong>disabled</strong> — недоступен
+					</li>
+					<li><strong>data-tags</strong> — режим тегов (только для multiple), позволяет вставлять выбранные
+						значения в виде тегов с
+						крестиком для удаления. Также есть возможность выводить эти теги в любом указанном месте, указав
+						селектор блока в качестве значения атрибута
+					</li>
+					<li><strong>data-scroll</strong> — включит прокрутку для выпадающего списка, дополнительно можно
+						подключить кастомный
+						скролл simplebar в js/app.js. Указанное число для атрибута ограничит высоту контейнера выпадающего
+						списка
+					</li>
+					<li><strong>data-checkbox</strong> (в работе) — стилизация элементов по checkbox (только для multiple)
+					</li>
+					<li><strong>data-show-selected</strong> — отключает скрытие выбранного элемента
+					</li>
+					<li><strong>data-search</strong> — позволяет искать по выпадающему списку
+					</li>
+					<li><strong>data-speed</strong> — позволяет указать скорость открытия/закрытия списка в миллисекундах, по
+						умолчанию 150
+					</li>
+					<li><strong>data-open</strong> — селект открыт сразу
+					</li>
+					<li><strong>data-submit</strong> — отправляет форму при изменении селекта
+					</li>
+					<li><strong>data-pseudo-label=заголовок</strong> — добавляет псевдоэлемент к заголовку селекта с
+						указанным текстом, а
+						также класс <strong>_select-pseudo-label</strong>
+					</li>
+				</ul>
+				<h3>Атрибуты для тега OPTION:
+				</h3>
+				<ul class="listsp">
+					<li><strong>data-class=имя класса</strong> — добавляет класс
+					</li>
+					<li><strong>data-asset=путь к картинке или текст</strong> — добавляет в элемент списка структуру двух
+						колонок с указанными данными
+					</li>
+					<li><strong>data-href=адрес ссылки</strong> — добавляет ссылку в элемент списка
+					</li>
+					<li><strong>data-href-blank </strong> — откроет ссылку в новом окне
+					</li>
+				</ul>
+				<h3>Атрибуты для для плейсхолдера (плейсхолдер — это OPTION с пустым value)
+				</h3>
+				<ul class="listsp">
+					<li><strong>data-label</strong> — добавляет label к селекту
+					</li>
+					<li><strong>data-show</strong> — показывает плейсхолдер в списке (только для единичного выбора)
+					</li>
+				</ul>
+				<h3>Атрибуты для прочих элементов
+				</h3>
+				<ul class="listsp">
+					<li><strong>data-one-select</strong> — селекты внутри объекта с этим атрибутом будут открываться только
+						по одному. То есть при открытии селекта другой открытый селект закрывается.
+					</li>
+				</ul>
+				<h3>Пример селекта с некоторыми атрибутами
+				</h3>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);">&lt;select data-submit data-scroll name=<span class="hljs-string" style="color: rgb(162, 252, 162);">"form[]"</span> class=<span class="hljs-string" style="color: rgb(162, 252, 162);">"form"</span>&gt;
+					&lt;<span class="hljs-keyword" style="color: rgb(252, 194, 140);">option</span> <span class="hljs-keyword" style="color: rgb(252, 194, 140);">value</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">""</span> selected&gt;Плейсхолдер&lt;/<span class="hljs-keyword" style="color: rgb(252, 194, 140);">option</span>&gt;
+					&lt;<span class="hljs-keyword" style="color: rgb(252, 194, 140);">option</span> <span class="hljs-keyword" style="color: rgb(252, 194, 140);">value</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"2"</span>&gt;Пункт&lt;/<span class="hljs-keyword" style="color: rgb(252, 194, 140);">option</span>&gt;
+					&lt;<span class="hljs-keyword" style="color: rgb(252, 194, 140);">option</span> data-href=<span class="hljs-string" style="color: rgb(162, 252, 162);">"about.html"</span> <span class="hljs-keyword" style="color: rgb(252, 194, 140);">value</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"3"</span>&gt;Пункт ссылка&lt;/<span class="hljs-keyword" style="color: rgb(252, 194, 140);">option</span>&gt;
+					&lt;<span class="hljs-keyword" style="color: rgb(252, 194, 140);">option</span> <span class="hljs-keyword" style="color: rgb(252, 194, 140);">value</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"4"</span>&gt;Пункт&lt;/<span class="hljs-keyword" style="color: rgb(252, 194, 140);">option</span>&gt;
+				&lt;/select&gt;</pre>
+				<h3>Классы которые формируются модулем
+				</h3>
+				<ol class="listsp">
+					<li><strong>select</strong> — Главный блок
+					</li>
+					<li><strong>select__body</strong> — Тело селекта
+					</li>
+					<li><strong>select__title</strong> — Заголовок
+					</li>
+					<li><strong>select__value</strong> — Значение в заголовке
+					</li>
+					<li><strong>select__label</strong> — Лейбл
+					</li>
+					<li><strong>select__input</strong> — Поле ввода
+					</li>
+					<li><strong>select__text</strong> — Оболочка текстовых данных</li>
+					<li><strong>select__link</strong> — Ссылка в элементе
+					</li>
+					<li><strong>select__options</strong> — Выпадающий список
+					</li>
+					<li><strong>select__scroll</strong> — Оболочка при скролле
+					</li>
+					<li><strong>select__option</strong> — Пункт</li>
+					<li><strong>select__content</strong> — Оболочка контента в заголовке
+					</li>
+					<li><strong>select__row</strong> — Ряд
+					</li>
+					<li><strong>select__asset</strong> — Дополнительные данные
+					</li>
+					<li><strong>_select-disabled</strong> — Запрещен
+					</li>
+					<li><strong>_select-tag</strong> — Класс тега
+					</li>
+					<li><strong>_select-open</strong> — Список открыт
+					</li>
+					<li><strong>_select-active</strong> — Список выбран
+					</li>
+					<li><strong>_select-focus</strong> — Список в фокусе
+					</li>
+					<li><strong>_select-multiple</strong> — Мультивыбор
+					</li>
+					<li><strong>_select-checkbox</strong> — Стиль чекбокса
+					</li>
+					<li><strong>_select-selected</strong> — Выбранный пункт
+					</li>
+					<li><strong>_select-pseudo-label</strong> — Псевдолейбл для заголовка селекта
+					</li>
+				</ol>
+				<h3>События</h3>
+				<p>После каждого выбора элементы селекта срабатывает событие strongselectCallback, его можно отловить в
+					любой части кода:
+				</p>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);"><span class="hljs-built_in" style="color: rgb(255, 255, 170);">document</span>.addEventListener(<span class="hljs-string" style="color: rgb(162, 252, 162);">"selectCallback"</span>, <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(252, 194, 140);">function</span> (<span class="hljs-params">e</span>) </span>{
+					<span class="hljs-comment" style="color: rgb(136, 136, 136);">// Селект </span>
+					<span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> currentSelect = e.detail.select;
+				});</pre>
+				<h3>Расположение и дополнительные данные
+				</h3>
+				<p>Класс <strong>SelectConstructor</strong> находится в файле <strong>js/libs/select.js</strong>
+				</p>
+
 			</div>
 
 			<div id="home20" class="home-menu">
 				<h1>Модуль «Галерея»</h1>
+				<p>Функционал подключает галерею <a href="https://www.lightgalleryjs.com/">(LightGallery)</a> . При клике на
+					превью картинки полное изображение открывается
+					с возможностью слайд-шоу. Можно создавать как встроенные, так и лайтбокс-галереи ( в правом углу
+					располагается ряд кнопок (настраиваемо) для расширенных функций. Например: «Закрыть слайд-шоу», «Загрузка
+					изображения» и пр. Галерея, поддерживает как простые изображения, так и видео или фреймы.
+				</p>
+				<p>Для работы галереи необходимы изображения (видеофайлы) в двух форматах: миниатюры – изображения
+					небольшого размера которые используются для предварительного просмотра и изображения полного размера –
+					необходимые для детального просмотра.
+				</p>
+				<h3>Подключение функционала
+				</h3>
+				<p><strong>[JS]</strong> В файле <strong>js/app.js</strong> раскомментировать строку <strong>import
+						«./files/gallery.js»;</strong>
+				</p>
+				<h3>Использование функционала
+				</h3>
+				<p><strong>[HTML]</strong> К тегу родителя объектов галереи, добавляем HTML-атрибут
+					<strong>data-gallery</strong>.
+				</p>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);">&lt;<span class="hljs-keyword" style="color: rgb(252, 194, 140);">div</span> data-gallery <span class="hljs-built_in" style="color: rgb(255, 255, 170);">class</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"gallery"</span>&lt;/<span class="hljs-keyword" style="color: rgb(252, 194, 140);">div</span>&gt;</pre>
+				<p>Сам объект галереи состоят из такой конструкции (тег для изображения полного размера и внутри тег для
+					превью). Например, можно использовать такую разметку:
+				</p>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);">&lt;div data-gallery <span class="hljs-class"><span class="hljs-keyword" style="color: rgb(252, 194, 140);">class</span></span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"gallery"</span>&gt;
+					&lt;a href=<span class="hljs-string" style="color: rgb(162, 252, 162);">"img/img-full-1.jpg"</span> <span class="hljs-class"><span class="hljs-keyword" style="color: rgb(252, 194, 140);">class</span></span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"gallery__image"</span>&gt;
+						&lt;img alt=<span class="hljs-string" style="color: rgb(162, 252, 162);">"Превью"</span> src=<span class="hljs-string" style="color: rgb(162, 252, 162);">"img/img-thumb-1.jpg"</span> <span class="hljs-class"><span class="hljs-keyword" style="color: rgb(252, 194, 140);">class</span></span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"gallery__preview"</span>&gt;
+					&lt;/a&gt;
+					&lt;a href=<span class="hljs-string" style="color: rgb(162, 252, 162);">"img/img-full-2.jpg"</span> <span class="hljs-class"><span class="hljs-keyword" style="color: rgb(252, 194, 140);">class</span></span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"gallery__image"</span>&gt;
+						&lt;img alt=<span class="hljs-string" style="color: rgb(162, 252, 162);">"Превью"</span> src=<span class="hljs-string" style="color: rgb(162, 252, 162);">"img/img-thumb-2.jpg"</span> <span class="hljs-class"><span class="hljs-keyword" style="color: rgb(252, 194, 140);">class</span></span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"gallery__preview"</span>&gt;
+					&lt;/a&gt;
+				&lt;/div&gt;</pre>
+				<h3>Расположение и дополнительные данные
+				</h3>
+				<p>Функционал находится в <strong>js/files/gallery.js</strong>
+				</p>
+				<p>Подробная документация по работе с самим плагином на сайте галереи <a
+						href="https://www.lightgalleryjs.com/docs/">https://www.lightgalleryjs.com/docs/</a>
+				</p>
+				<h1>Работа с SVG-спрайтами
+				</h1>
+				<h3>Создание SVG-спрайта
+				</h3>
+				<p>Для этого следует скопировать отдельные SVG иконки в папку src/svgicons (если такой папки нет, нужно её
+					создать). Далее запускаем команду в терминале <strong>npm run sprite</strong></p>
+				<p>Создавать SVG-спрайт следует до вызова команды <strong>npm run dev</strong>
+				</p>
+				<p>После выполнения команды отдельные SVG иконки соберутся в единый файл (спрайт)
+					<strong>src/img/icons/icons.svg</strong>
+				</p>
+				<p>Если набор отдельных иконок в папке src/svgicons изменился, следует повторить команду <strong>npm run
+						sprite</strong>
+				</p>
+				<h3>Использование SVG-спрайта
+				</h3>
+				<p>Каждой иконке в общем файле (спрайте) будет присвоен уникальный ID состоящий из строки
+					svg-имя-файла-иконки. Например, если имя файла отдельной иконки было list.svg то ID будет svg-list.
+					Следовательно, вывести необходимую иконку в нужном месте можно с помощью кода:
+				</p>
+				<pre class="hljs"
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);">&lt;svg&gt;<span class="xml"><span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;<span class="hljs-name" style="font-weight: 700;">use</span> <span class="hljs-attr">xlink:href</span>=<span class="hljs-string" style="color: rgb(162, 252, 162);">"@img/icons/icons.svg#svg-list"</span>&gt;</span><span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">use</span>&gt;</span></span><span class="xml"><span class="hljs-tag" style="color: rgb(98, 200, 243);">&lt;/<span class="hljs-name" style="font-weight: 700;">svg</span>&gt;</span></span></pre>
 			</div>
 
 		</section>
