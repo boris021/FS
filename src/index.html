@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 @@include('html/_head.htm',{
-"title":"Главная"
+"title":"Чертоги Фрилансера v3"
 })
 
 <body>
@@ -355,9 +355,9 @@
 				<h4>В этот файл нужно аккуратно вставить следующий код</h4>
 				<pre class="hljs"
 					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);"><span class="hljs-string" style="color: rgb(162, 252, 162);">"path-autocomplete.pathMappings"</span>: {
-					<span class="hljs-string" style="color: rgb(162, 252, 162);">"@img"</span>: <span class="hljs-string" style="color: rgb(162, 252, 162);">"${folder}/src/img"</span>, <span class="hljs-regexp" style="color: rgb(198, 180, 240);">//</span> <span class="hljs-keyword" style="color: rgb(252, 194, 140);">alias</span> <span class="hljs-keyword" style="color: rgb(252, 194, 140);">for</span> images
-					<span class="hljs-string" style="color: rgb(162, 252, 162);">"@scss"</span>: <span class="hljs-string" style="color: rgb(162, 252, 162);">"${folder}/src/scss"</span>, <span class="hljs-regexp" style="color: rgb(198, 180, 240);">//</span> <span class="hljs-keyword" style="color: rgb(252, 194, 140);">alias</span> <span class="hljs-keyword" style="color: rgb(252, 194, 140);">for</span> scss
-					<span class="hljs-string" style="color: rgb(162, 252, 162);">"@js"</span>: <span class="hljs-string" style="color: rgb(162, 252, 162);">"${folder}/src/js"</span>, <span class="hljs-regexp" style="color: rgb(198, 180, 240);">//</span> <span class="hljs-keyword" style="color: rgb(252, 194, 140);">alias</span> <span class="hljs-keyword" style="color: rgb(252, 194, 140);">for</span> js
+					<span class="hljs-string" style="color: rgb(162, 252, 162);">"img"</span>: <span class="hljs-string" style="color: rgb(162, 252, 162);">"${folder}/simg"</span>, <span class="hljs-regexp" style="color: rgb(198, 180, 240);">//alias for images
+					<span class="hljs-string" style="color: rgb(162, 252, 162);">"@scss"</span>: <span class="hljs-string" style="color: rgb(162, 252, 162);">"${folder}/src/scss"</span>, <span class="hljs-regexp" style="color: rgb(198, 180, 240);"></span>//alias for scss 
+					<span class="hljs-string" style="color: rgb(162, 252, 162);">"@js"</span>: <span class="hljs-string" style="color: rgb(162, 252, 162);">"${folder}/src/js"</span>, <span class="hljs-regexp" style="color: rgb(198, 180, 240);">// alias for js
 					}</pre>
 				<h4>Очень важно соблюдать синтаксис JSON, обращайте внимания на запятые:</h4>
 				<img src="@img/image4.jpg" alt="" class="img-home">
@@ -682,8 +682,7 @@
 				<h4>Пример подключения шрифта Montserrat:
 				</h4>
 				<pre class="hljs"
-					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);">@<span class="hljs-keyword" style="color: rgb(252, 194, 140);">import</span> url(https:<span class="hljs-comment" style="color: rgb(136, 136, 136);">//fonts.googleapis.com/css?family=Montserrat:400,500,800&amp;display=swap);</span>
-				</pre>
+					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);">@<span class="hljs-keyword" style="color: rgb(252, 194, 140);">import</span> url(https:<span class="hljs-comment" style="color: rgb(136, 136, 136);">//fonts.googleapis.com/css?family=Montserrat:400,500,800&amp;display=swap);</span></pre>
 				<p>Шрифты подключенные из Google Fonts не должны попадать в папку с результатом (dist), они подгружаются с
 					сервера Google.
 				</p>
@@ -1140,7 +1139,7 @@
 
 			</div>
 
-			<div id=" home10" class="home-menu">
+			<div id="home10" class="home-menu">
 				<h1>Модуль «Прокрутка к нужному блоку». Плавная навигация по странице.</h1>
 				<p>В данном модуле реализован плавный скролл после клика по ссылке (кнопке) до нужного блока на странице.
 					Если в адресе страницы будет передан хеш и блок с таким селектором будет найден на странице, прокрутка к
@@ -1289,7 +1288,7 @@
 
 			</div>
 
-			<div id=" home12" class="home-menu">
+			<div id="home12" class="home-menu">
 				<h1>Модуль «Наблюдатель» за появлением элементов при прокрутке страницы (скролле)</h1>
 				<p>Модуль «Наблюдатель» можно использовать для решения самых разных задач: анимация элементов при скролле,
 					подсветка активного пункта меню (используется в модуле «Прокрутка к нужному блоку») и многих других.
